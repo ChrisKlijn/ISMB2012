@@ -1,0 +1,1 @@
+for file in *.md; do Markdown.pl $file > ${file/md/html}; done
