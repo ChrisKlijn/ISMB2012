@@ -94,7 +94,7 @@
 
 <p>In the end, they validate on a series of prokaryotic genomes, where GRASS outperforms other scaffolding programs on number of scaffolds and number of breakpoints. No indication how this would work on larger, more complex genomes.</p>
 
-<h4>Ali Mortazavi UC Irvine</h4>
+<h4>Ali Mortazavi, UC Irvine</h4>
 
 <h5>RNA editing in ENCODE cell lines</h5>
 
@@ -117,3 +117,69 @@
 <p>As they didn't have high depth resequenced genomes for some cell lines, they were able to use the control sample of Chip-Seq data to filter many variants as present in DNA, as the non-binding DNA in a Chip-Seq experiment is generally from expressed genes. Interesting idea.</p>
 
 <p>Finally, they conclude that most RNA editing events are canonical A-G, and some conclusion on making sure you don't use old sequencing data with sequence biases. To bad they did not go into more biological implications of RNAediting (as most seemed to be associated with repeats), except mentioning it seems to happen more frequently in cell death-associated genes.</p>
+
+<hr />
+
+<h2>Day 2</h2>
+
+<h3>Keynote Chris Sander - Sloan Kettering NY</h3>
+
+<h4>Decoding evolutionary information from sequencing: protein 3d structure</h4>
+
+<p>The opening focused on the need to understand the 3d structure of a protein, in the context of acquired resistance (or subclonally present) to therapy. There is an international and a US program that tries to solve the structure of all known proteins. Unfortunately, there is a widening gap between the number of known sequences and the number of solved structures. The speaker is an advocate for 'genomic' protein structure determination. </p>
+
+<p>The idea is to look at 'correlated' amino acids through evolution, to determine structurally associated amino acids. THe approach they used is the mutual information between two amino acids (for all all amino acids in a protein), but it did not work, due to transitive correlation:</p>
+
+<pre><code>A and B are correlated and causative
+B and C are correlated and causative
+A and C are correlated but not causatuve
+</code></pre>
+
+<p>This gave many false positives. The solution is to apply a global probability model in the mutual information calculation. The speaker took some time to go into the mathematical derivation of the global probability model, which they call the maximum entropy (<a href="http://www.ncbi.nlm.nih.gov/pubmed/22163331">Marks et al 2011</a>).</p>
+
+<p>Applying this new way of scoring allows for much better prediction of contacting amino acids, leading to a fairly accurate computational 3d structure determination. They are currently applying their evolution-directed approach to many different proteins, known ones to validate their approach and unknown ones.</p>
+
+<hr />
+
+<h3>Small talks Saturday</h3>
+
+<h4>Yongjin Li, University of Texas</h4>
+
+<h5>Local alignment for fusion gene detection</h5>
+
+<p>This talk focused on fusion gene detection, and their unique approach is that they use local assembly to do the detection. It was a bit unclear why their approach is actually better than the many approaches out there. The only real-data test they do is on two cell lines.</p>
+
+<h4>Jurgen Nijkamp, Delft University of Technolofy</h4>
+
+<h5>De-novo copy number detection via assembly</h5>
+
+<p>Instead of using a reference genome and mapping reads to infer CNVs, this algorithm called <strong>Magnolya</strong> uses <em>de novo</em> assembly to determine CNVs. As they wish to determine CNVs in paired samples, they do co-assembly of two samples. Their basic data structure is a colored contig graph.</p>
+
+<p>To determine the integer copy number per contig they model the data using a Poisson distribution, where the labda is estimated from the data and represents the copy number (and 2 labda a double copy number). To prevent high copy number contigs from influencing the data too much they include a geometric distribution term to capture the large copy number fragments.</p>
+
+<hr />
+
+<h2>Keynote SNPsig</h2>
+
+<h3>David Haussler</h3>
+
+<h4>Cancer Genomics</h4>
+
+<p>In his opening he goes over the advent of sequencing and that tumor sequencing is the necessary to solve difficult problems such as drug resistance. He then moved on to the TCA.</p>
+
+<p>UCSC is that data center of the TCGA. Currently they hold 21,000 files for around 5,000 cases. It is possible to co-locate servers next to the TCGA storage to get enough speed to analyze it. They built CGHub as an access point, API, from which the data is accessible. One thing that they have built on top of it is the <a href="https://genome-cancer.ucsc.edu/">UCSC Cancer Genomics Browser</a>.</p>
+
+<p>He described two main challenges:</p>
+
+<ol>
+<li>Correlate the mutations in an individual to their phenotype</li>
+<li>Discover the concerted themes of mutation in a cohort of patients</li>
+</ol>
+
+<p>He will go into the challenges related to point 1 mainly. The first problem is how to call mutations. Three different cancer mutation calling pipelines are still around 33% discordant. Why is it so hard? The first reason is tumor heterogeneity, what is a mutation in that context? Secondly, the number are against you, 1 in 1,000,000 bases is a somatic variant. Your pipeline has to be very sensitive to find them. Finding structural variations is even harder.</p>
+
+<p>He then goes on to expand on different examples of structural variations found in TCGA data. He goes on show an example of <em>chromothripsis</em> in glioblastoma. They are trying to reconstruct the rearranged genome based on the data. From the <em>chromothripsis</em> event in GBM they were able to reconstruct two circular double minutes containing a MDM2 amplification. </p>
+
+<p>The next topic is allele-specific copy number states. Using allele calls they are able to differentiate copy number states for different chromosomes. Finally they are looking to map results of the TCGA onto pathways.</p>
+
+<hr />
