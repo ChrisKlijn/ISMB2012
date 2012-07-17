@@ -37,6 +37,40 @@ She then shows an example of single cell sequencing in iPS cells. They show clus
 
 The final topic is using [Self-Organising Maps (SOMs)](http://en.wikipedia.org/wiki/Self-organizing_map) to visualize many different (chromatin) datatypes of the ENCODE project. They integrated 6 cell lines with 8 chromatin data types. This part of the story is very visual, where they map many heatmaps on an unfolded torus, and apply the SOM to generate ordered heatmaps. By comparing the resulting heatmaps for different chromatin marks overlaps and differences between marks can be found. 
 
+### Keynote 4
+#### Progress, challenges and opportunities in population genome sequencing
+##### Richard Durbin, Sanger Institute
+
+Identical twins show that there is a strong role of genetics in health and human variation. The direct way to look at genetics is to sequence genomes, which has become easier in the last decade. The speaker predicts millions of sequenced genomes to be done by 2020.
+
+###### 1000 Genomes
+
+The speaker poses the question whether a reference genome is the right way to keep comparing genetics, or whether a richer representation is needed. He then goes on to describe the 1000 genomes project. The aims of the projects are, interestingly enough, to sequence 2500 people, with a 95% accuracy for the 1% frequency SNPs. Phase one was completed in 2011 where they analyzed 1100 samples. The new 2500 samples set selected a large group of new populations. For these samples they plan to do 4x WGS and deep exome data. Currently, the phase 1 series has 38.9M variants, 1.4M indels and 14K large deletions.
+
+Due to the pooling of samples, they are capable of detecting with 99% accuracy any variant that is present at a rate of 1%. Genotyping data is less effective, but improves if LD is taken into account. The speaker then continued on some of the issues the 1000 genomes faces. Many are due to errors in sequencing:
+
+1. Base call errors (independent per sequencing platform)
+2. Sampling error, not all samples are investigated equally deep
+3. Mapping errors, the source of most errors
+
+###### Assembly-based variant detection
+
+Mapping errors are highly dependent and cause almost all the problems. One way they solved this is by chucking regions where there were too many variants too close. They use filters to solve these issues, but the best solution is to change the reference. He is of the opinion that we should move to an assembly-based approach. He proposes to use the Burrows-Wheeler transform methods in a combined assembly/mapping approach. To this end he utilizes the FM index in an assembly approach, implemented in an algorithm called SGA.
+
+The application of assembly in detection of variation would be in an approach of reference free variation detection. The way they do it is by just assembling the differences between samples. Taking unique k-mers for a given sample in comparative assemblies and reconstructing the graph around those unique nodes in the De Bruijn graph. 
+
+They detect new indels, but fail to find all SNPs in a validation set of data. Although the current approach is not viable yet, it will be valuable to put more efforts in developing reference-free assembly methods. 
+
+###### Regulation of gene expression
+
+The speaker then changes subjects: the next part will be about gene regulation. the first example is small RNAs that regulate mRNAs. They examined small RNA QTLs and found 14 small RNAs regulated in _cis_ with a SNP. Of these 14, 8 are also eQTLs for genes. 4 of them were significant in a BMI GWAS. However, there is no direct correlation between miRNA and mRNA expression levels. 
+
+His final topic is an analysis of CTCF binding sites on 60 1000-genomes samples. They find several QTLs with the binding sites. There is an enrichment of these QTLs directly in the motif for binding of CTCF (25%). However, 75% is not in the motif themselves, so they are looking for other DNA features influencing CTCF binding.
+
+###### Bank of iPS cells
+
+There is a new project started by the Wellcome trust to establish a UK human iPS cell bank from 500 normal people and 500 people suffering from a mono-genic disease. The problem with iPS is the generation of new mutations, however according to a clonogenic test there are between 1-5 new mutations in the generation of the lines. iPS cells also cluster by ES state, not by tissue of origin in RNAseq data. Different cell lines do show different ability to differentiate. This is a good system to examine genetic influences on differentiation.  
+
 ****
 
 ## Late Breaking Research Day 2 
@@ -96,7 +130,43 @@ The second part of the talk expands on the poor overlap between TF binding and r
 
 This, combined with using the ClosestGene approach, which is agnostic to gene density, they are able to find better clustered groups of target genes. 
 
+****
 
+## Special Session - Bioinformatic Integration of Diverse Experimental Data Sources
 
+### Network biology
+#### Trey Ideker, UCSD
 
+Network biology goes from genotype to phenotype via a mode (the network), where the intermediate model is constructed/annotated from a diverse collection of data types. The networks can be actively 'colored' by certain datatypes to find functional submodules. 
+
+An example is an RNAi dataset in the context of HIV infection. By looking for local enrichment for RNAi phenotypes in the network, mechanisms can be found that work in HIV infection. Another example is mapping genetic synthetic lethal interactions on a physical interaction network. 
+
+The rest of the talk will be on NeXO (Network Extracted Ontologies). The statement he poses is that clustering of data is flat, or modular. But there is a general hierarchy in biology. (proteins -> subunits -> complexes -> pathways -> cellular programs). This is evident in the organisation of the Gene Ontology (GO) classes. The challenge the speaker poses is: can we cluster a network in a hierarchical manner? 
+
+Interestingly, in GO terms, especially smaller leaf terms, there is already a large enrichment of interacting proteins. Now, he looks to find ontologies directly from the network. They do this with an altered algorithm for social network mapping, which they call NeXO. They then map the GO terms from the human annotated GO to the network GO. Basically, the network ontology is good at recapitulation of cellular component GO part, but not molecular function or biological function. This additional annotation results in a much more informative network than the single PPI network.
+
+### Unsupervised clustering methods in systems biology and systems pharmacology
+#### Avi Ma'ayan, Mount Sinai 
+
+The speaker will focus on two subjects:
+
+1. Expression2Kinases
+2. Sets2Networks and Genes2FANs
+
+The speaker starts with the introduction of a set of web-based tools, PPI, Genes2Networks, ChEA, KEA. These are then combined into an analysis of protein kinases that regulate transcription factors (ie. examine the upstream components of differentially expressed genes). They call this approach Genes2Kinases. They apply this data to the L1000 data (mini-microarrays that are very cheap to run). The ruslt of this analysis is a bit vague to me.
+
+Genes2FANs is a tool to examine enrichment in networks that are constructed from Broad-produced gnee enrichment set lists, so-called GMT files. They have web-interface to do these studies. 
+
+The speaker went on to introduce a lot of different ways to construct networks, including collaborator networks etx.
+
+****
+
+## Special Session - Celebrating Science Together: ISMB 20 Years and NIGMS 50th anniversary special session
+
+### Linking genes to traits efficiently
+#### Ed Marcotte
+
+The classic way to link genes to a trait is to look in the local network neighborhood to find genes that are close to a gene that is known to be associated. Evolution guides the way in these cases, where plant data is driven by yeast and animal data. The speakers' research basically focuses on defining small modules of genes that harbor a functional relationship, but in different organisms lead to different phenotypes when disrupted. These modules are called 'phenologs'.
+
+An example of this is a SOX13 knock out in fish induces strong angiogenesis defects, and it has the same function in human endothelial genes, but was identified in yeast where its knock out causes lovastatin sensitivity. They take this result back to yeast and examine other genes that are involved in lovastatin resistance and find new drugs that might work as angiogenesis inhibitors in higher organisms. They find one such example for a compound that was approved in another indication 40 years ago. 
 
