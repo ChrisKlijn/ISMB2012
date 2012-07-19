@@ -1,7 +1,7 @@
 <link href="style.css" rel="stylesheet"></link>
 
 # ISMB 2012 - Long Beach
-## Main conference - Day 2
+## Main conference - Day 3
 
 ### Workshop - From Postdoc to Principal Investigator
 #### Applying

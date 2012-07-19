@@ -14,7 +14,7 @@ Determination of a specific subclonal population is very significant, as they mi
 
 It would also be really cool to visualize the population with regards to spatial distribution. This has never been really answered: How are the different populations located in relation to each other in the tumor mass.
 
-The 21 breast cancers show a great way of determining subpopulations based on WGS data, where it is possible to find chromosomes that are lost or gained in specific subgroups in the data. However, it is impossible to determine which chromosomes co-segregated (is the chr. 7 loss only in the subset of cells that also lost chr 13?). If one would be able to generate single cell barcoded reads to exactly deconvolve the mixture. 
+The 21 breast cancers show a great way of determining subpopulations based on WGS data, where it is possible to find chromosomes that are lost or gained in specific subgroups in the data. However, it is impossible to determine which chromosomes co-segregated (is the chr. 7 loss only in the subset of cells that also lost chr 13?). If one would be able to generate single cell barcoded reads to exactly deconvolve the mixtcure. 
 
 
 
